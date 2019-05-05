@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1557024702828.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "2E053F61",
+    "lastKnownWriteTime" : 7881144760992887905,
+    "last_content_update" : 1557024702828,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "3435BBB9",
+        "caption" : "ratings_matrix",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=ratings_matrix&cache_key=3435BBB9",
+        "displayedObservations" : 53424,
+        "environment" : "",
+        "object" : "ratings_matrix",
+        "preview" : 0,
+        "totalObservations" : 53424,
+        "variables" : 10001
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

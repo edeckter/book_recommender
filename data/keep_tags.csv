@@ -1,0 +1,335 @@
+tag_id,tag_name,tag_count,match,max_score,Genre,Alt1,Alt2,Alt3
+11743,fiction,3688819,13,100,Fiction,Literature,NA,NA
+11305,fantasy,3548157,12,100,Fantasy,NA,NA,NA
+33114,young-adult,1848306,39,100,Young Adult,YA,NA,NA
+7457,classics,1756920,7,100,Classics,NA,NA,NA
+26138,romance,1231926,30,100,Romance,NA,NA,NA
+20939,mystery,872282,23,100,Mystery,NA,NA,NA
+21689,non-fiction,857901,24,100,Non-fiction,Nonfiction,NA,NA
+14487,historical-fiction,815421,16,100,Historical Fiction,NA,NA,NA
+26837,science-fiction,703866,32,100,Science Fiction,Sci-Fi,SF,SFF
+22973,paranormal,542559,25,100,Paranormal,NA,NA,NA
+8055,contemporary,486001,9,100,Contemporary,NA,NA,NA
+14821,horror,415467,18,100,Horror,NA,NA,NA
+7404,classic,334113,7,93,Classics,NA,NA,NA
+6953,childrens,315716,5,94,Children,NA,NA,NA
+13561,graphic-novels,313560,15,100,Graphic Novels,Manga,NA,NA
+30358,thriller,309276,37,100,Thriller,NA,NA,NA
+14552,history,291366,17,100,History,NA,NA,NA
+6750,chick-lit,251072,4,100,Chick Lit,NA,NA,NA
+6857,children,218410,5,100,Children,NA,NA,NA
+8517,crime,204493,11,100,Crime,NA,NA,NA
+7778,comics,193981,8,100,Comics,NA,NA,NA
+19733,memoir,183477,21,100,Memoir,NA,NA,NA
+6888,children-s,179037,5,89,Children,NA,NA,NA
+4605,biography,172444,2,100,Biography,NA,NA,NA
+19052,manga,148583,20,100,Manga,NA,NA,NA
+23471,philosophy,141156,26,100,Philosophy,NA,NA,NA
+13547,graphic-novel,138563,15,96,Graphic Novels,Manga,NA,NA
+26816,science,138377,31,100,Science,NA,NA,NA
+29076,suspense,132115,34,100,Suspense,NA,NA,NA
+23831,poetry,127220,27,100,Poetry,NA,NA,NA
+24526,psychology,86830,28,100,Psychology,NA,NA,NA
+5951,business,73249,3,100,Business,NA,NA,NA
+19742,memoirs,68063,21,92,Memoir,NA,NA,NA
+25647,religion,63940,29,100,Religion,NA,NA,NA
+7077,christian,53864,6,100,Christian,NA,NA,NA
+27095,self-help,52051,33,100,Self Help,NA,NA,NA
+30386,thrillers,47883,37,94,Thriller,NA,NA,NA
+31155,travel,46595,38,100,Travel,NA,NA,NA
+8782,cómics,34793,8,91,Comics,NA,NA,NA
+2938,art,30262,1,100,Art,NA,NA,NA
+28384,spirituality,28405,35,100,Spirituality,NA,NA,NA
+7563,clàssics,28198,7,93,Classics,NA,NA,NA
+20673,music,25630,22,100,Music,NA,NA,NA
+28422,sports,23821,36,100,Sports,NA,NA,NA
+28341,spiritual,22936,35,86,Spirituality,NA,NA,NA
+8150,cookbooks,22689,10,100,Cookbooks,NA,NA,NA
+7739,comic,22546,8,91,Comics,NA,NA,NA
+19175,mangá,21522,20,89,Manga,NA,NA,NA
+6766,chicklit,21449,4,94,Chick Lit,NA,NA,NA
+7203,christianity,17316,6,86,Christian,NA,NA,NA
+33004,ya-contemporary,17078,9,89,Contemporary,NA,NA,NA
+33035,ya-paranormal,14985,25,87,Paranormal,NA,NA,NA
+6729,chic-lit,14949,4,94,Chick Lit,NA,NA,NA
+11780,fiction-historical,7615,16,100,Historical Fiction,NA,NA,NA
+19165,mangas,6068,20,91,Manga,NA,NA,NA
+8779,còmics,4948,8,91,Comics,NA,NA,NA
+13597,graphicnovels,4681,15,96,Graphic Novels,Manga,NA,NA
+14461,historic-fiction,4606,16,94,Historical Fiction,NA,NA,NA
+8084,contemporary-ya,4029,9,89,Contemporary,NA,NA,NA
+7451,classici,4023,7,88,Classics,NA,NA,NA
+8130,cookbook,3894,10,94,Cookbooks,NA,NA,NA
+11396,fantasía,3524,12,86,Fantasy,NA,NA,NA
+28420,sport,3389,36,91,Sports,NA,NA,NA
+14520,historical-non-fiction,2382,16,90,Historical Fiction,NA,NA,NA
+33138,young-adults,1725,39,96,Young Adult,YA,NA,NA
+15960,j-fiction,1611,13,88,Fiction,Literature,NA,NA
+26178,romancé,1561,30,92,Romance,NA,NA,NA
+25709,religión,1555,29,93,Religion,NA,NA,NA
+20205,mistery,1522,23,86,Mystery,NA,NA,NA
+13596,graphicnovel,1372,15,92,Graphic Novels,Manga,NA,NA
+8069,contemporary-lit,1336,9,86,Contemporary,NA,NA,NA
+3169,arts,1094,1,86,Art,NA,NA,NA
+33018,ya-historical-fiction,1065,16,92,Historical Fiction,NA,NA,NA
+14485,historical-fic,939,16,88,Historical Fiction,NA,NA,NA
+26885,sciences,860,31,93,Science,NA,NA,NA
+13594,graphic_novels,773,15,93,Graphic Novels,Manga,NA,NA
+26177,romances,771,30,93,Romance,NA,NA,NA
+21732,non-fiction-science,727,31,88,Science,Sci-Fi,SF,SFF
+23469,philosophie,632,26,86,Philosophy,NA,NA,NA
+13952,hard-science-fiction,534,32,86,Science Fiction,Sci-Fi,SF,SFF
+22994,paranormal-ya,534,25,87,Paranormal,NA,NA,NA
+29073,suspence,513,34,88,Suspense,NA,NA,NA
+13593,graphic_novel,403,15,89,Graphic Novels,Manga,NA,NA
+7390,clasicos,380,7,88,Classics,NA,NA,NA
+23519,philosphy,368,26,95,Philosophy,NA,NA,NA
+21799,nonfiction-science,367,31,91,Science,Sci-Fi,SF,SFF
+33047,ya-science-fiction,344,32,91,Science Fiction,Sci-Fi,SF,SFF
+22995,paranormalcy,317,25,91,Paranormal,NA,NA,NA
+3120,arte,309,1,86,Art,NA,NA,NA
+24560,psycology,262,28,95,Psychology,NA,NA,NA
+20803,my-cookbooks,258,10,86,Cookbooks,NA,NA,NA
+8553,crimes,222,11,91,Crime,NA,NA,NA
+6772,chiclit,217,4,88,Chick Lit,NA,NA,NA
+25683,religions,217,29,94,Religion,NA,NA,NA
+26865,science-non-fiction,214,31,88,Science,Sci-Fi,SF,SFF
+24208,prehistoric-fiction,206,16,86,Historical Fiction,NA,NA,NA
+1660,adult-historical-fiction,191,16,86,Historical Fiction,NA,NA,NA
+12729,g-fantasy,187,12,88,Fantasy,NA,NA,NA
+26179,romane,184,30,92,Romance,NA,NA,NA
+7436,classic-sf,180,32,89,Science Fiction,NA,NA,NA
+24524,psychologie,166,28,86,Psychology,NA,NA,NA
+11283,fantacy,159,12,86,Fantasy,NA,NA,NA
+6759,chick-lits,157,4,95,Chick Lit,NA,NA,NA
+20702,musica,155,22,91,Music,NA,NA,NA
+31192,travels,139,38,92,Travel,NA,NA,NA
+21688,non-fictie,126,24,86,Non-fiction,Nonfiction,NA,NA
+33015,ya-graphic-novels,124,15,90,Graphic Novels,Manga,NA,NA
+32998,ya-chick-lit,122,4,86,Chick Lit,NA,NA,NA
+13010,genre-historical-fiction,113,16,86,Historical Fiction,NA,NA,NA
+25715,relígion,109,29,93,Religion,NA,NA,NA
+8080,contemporary-tbr,103,9,86,Contemporary,NA,NA,NA
+6016,bussiness,101,3,94,Business,NA,NA,NA
+5901,buisness,84,3,88,Business,NA,NA,NA
+7568,clássicos,76,7,88,Classics,NA,NA,NA
+12875,gay-and-lesbian,75,14,100,Gay and Lesbian,LGBT,NA,NA
+25603,region,57,29,86,Religion,NA,NA,NA
+23548,phylosophy,50,26,90,Philosophy,NA,NA,NA
+11289,fantasi,49,12,86,Fantasy,NA,NA,NA
+14503,historical-fiction-read,48,16,88,Historical Fiction,NA,NA,NA
+11308,fantasy-4,46,12,88,Fantasy,NA,NA,NA
+17757,lds-historical-fiction,46,16,90,Historical Fiction,NA,NA,NA
+26866,science-nonfiction,43,31,91,Science,Sci-Fi,SF,SFF
+31311,tudor-historical-fiction,43,16,86,Historical Fiction,NA,NA,NA
+24697,pyschology,40,28,90,Psychology,NA,NA,NA
+25643,religi,40,29,86,Religion,NA,NA,NA
+7455,classicos,39,7,94,Classics,NA,NA,NA
+25131,read-historical-fiction,38,16,88,Historical Fiction,NA,NA,NA
+11735,ficcion,36,13,86,Fiction,Literature,NA,NA
+12734,g-historical-fiction,33,16,95,Historical Fiction,NA,NA,NA
+13586,graphic-novels-tbr,32,15,88,Graphic Novels,Manga,NA,NA
+19432,mastery,32,23,86,Mystery,NA,NA,NA
+24210,prehistorical-fiction,32,16,92,Historical Fiction,NA,NA,NA
+11853,fictions,30,13,93,Fiction,Literature,NA,NA
+5805,bromance,29,30,93,Romance,NA,NA,NA
+27774,silence,29,31,86,Science,NA,NA,NA
+25710,religon,27,29,93,Religion,NA,NA,NA
+26840,science-fiction-dune,27,32,86,Science Fiction,Sci-Fi,SF,SFF
+15829,irreligion,26,29,89,Religion,NA,NA,NA
+13572,graphic-novels-dc,25,15,90,Graphic Novels,Manga,NA,NA
+6782,chik-lit,24,4,94,Chick Lit,NA,NA,NA
+20833,my-graphic-novels,24,15,90,Graphic Novels,Manga,NA,NA
+15052,humor-comedy,23,19,86,Humor and Comedy,Humor,Comedy,NA
+22989,paranormal-uf,23,25,87,Paranormal,NA,NA,NA
+14495,historical-fiction-egypt,21,16,86,Historical Fiction,NA,NA,NA
+33014,ya-graphic-novel,21,15,87,Graphic Novels,Manga,NA,NA
+11263,famtasy,20,12,86,Fantasy,NA,NA,NA
+25682,religione,20,29,94,Religion,NA,NA,NA
+11823,fiction-science,19,32,100,Science Fiction,Sci-Fi,SF,SFF
+11856,ficton,17,13,92,Fiction,Literature,NA,NA
+14820,horro,17,18,91,Horror,NA,NA,NA
+14478,historical-crime-fiction,16,16,86,Historical Fiction,NA,NA,NA
+21674,noir-fiction,16,24,87,Non-fiction,Nonfiction,NA,NA
+3026,art-historical-fiction,15,16,90,Historical Fiction,NA,NA,NA
+6783,chiklit,15,4,88,Chick Lit,NA,NA,NA
+7075,christain,14,6,89,Christian,NA,NA,NA
+10116,e-romance,14,30,88,Romance,NA,NA,NA
+23517,philosopy,14,26,95,Philosophy,NA,NA,NA
+3170,arts-,13,1,86,Art,NA,NA,NA
+6770,chicklits,13,4,89,Chick Lit,NA,NA,NA
+7728,comedy-humor,13,19,86,Humor and Comedy,Humor,Comedy,NA
+14506,historical-fiction-rome,13,16,88,Historical Fiction,NA,NA,NA
+30283,thiller,13,37,93,Thriller,NA,NA,NA
+4624,biographys,12,2,95,Biography,NA,NA,NA
+6014,businesses,12,3,89,Business,NA,NA,NA
+15973,j-mystery,12,23,88,Mystery,NA,NA,NA
+25648,religion-,12,29,100,Religion,NA,NA,NA
+1318,a-fiction,11,13,88,Fiction,Literature,NA,NA
+11744,fiction-,11,13,100,Fiction,Literature,NA,NA
+11847,fictional,11,13,88,Fiction,Literature,NA,NA
+21625,no-ficcion,11,24,86,Non-fiction,Nonfiction,NA,NA
+25279,read-science-fiction,11,32,86,Science Fiction,Sci-Fi,SF,SFF
+26846,science-fiction-read,11,32,86,Science Fiction,Sci-Fi,SF,SFF
+26,-fictional,10,13,88,Fiction,Literature,NA,NA
+6858,children-,10,5,100,Children,NA,NA,NA
+14457,historial-fiction,10,16,97,Historical Fiction,NA,NA,NA
+14866,horrors,10,18,92,Horror,NA,NA,NA
+17146,kids-historical-fiction,10,16,88,Historical Fiction,NA,NA,NA
+21743,non-fictions,10,24,96,Non-fiction,Nonfiction,NA,NA
+29088,suspenso,10,34,88,Suspense,NA,NA,NA
+32923,wwii-historical-fiction,10,16,88,Historical Fiction,NA,NA,NA
+42,-psychology-,9,28,100,Psychology,NA,NA,NA
+3187,arty,9,1,86,Art,NA,NA,NA
+26130,roman-historical-fiction,9,16,86,Historical Fiction,NA,NA,NA
+1006,3-sports,8,36,86,Sports,NA,NA,NA
+8061,contemporary-art,8,9,86,Contemporary,NA,NA,NA
+19741,memoires,8,21,86,Memoir,NA,NA,NA
+20908,mycookbooks,8,10,90,Cookbooks,NA,NA,NA
+26882,science-y,8,31,88,Science,NA,NA,NA
+6762,chick_lit,7,4,89,Chick Lit,NA,NA,NA
+10736,epic-historical-fiction,7,16,88,Historical Fiction,NA,NA,NA
+11303,fantasty,7,12,93,Fantasy,NA,NA,NA
+11738,ficiton,7,13,86,Fiction,Literature,NA,NA
+12738,g-mystery,7,23,88,Mystery,NA,NA,NA
+28410,spirtuality,7,35,96,Spirituality,NA,NA,NA
+13573,graphic-novels-etc,6,15,88,Graphic Novels,Manga,NA,NA
+14816,horor,6,18,91,Horror,NA,NA,NA
+21822,nookbooks,6,10,89,Cookbooks,NA,NA,NA
+23464,philosophic,6,26,86,Philosophy,NA,NA,NA
+24479,psichology,6,28,90,Psychology,NA,NA,NA
+26180,romaner,6,30,86,Romance,NA,NA,NA
+28404,spiritualité,6,35,96,Spirituality,NA,NA,NA
+28465,sprituality,6,35,96,Spirituality,NA,NA,NA
+32983,y-young-adult,6,39,92,Young Adult,YA,NA,NA
+571,2-non-fiction,5,24,92,Non-fiction,Nonfiction,NA,NA
+7201,christiane-f,5,6,86,Christian,NA,NA,NA
+7454,classico,5,7,88,Classics,NA,NA,NA
+8151,cookbooks-,5,10,100,Cookbooks,NA,NA,NA
+8552,crimen,5,11,91,Crime,NA,NA,NA
+12736,g-horror,5,18,86,Horror,NA,NA,NA
+15049,humor-and-comedy,5,19,100,Humor and Comedy,Humor,Comedy,NA
+21686,non-ficiton,5,24,91,Non-fiction,Nonfiction,NA,NA
+25644,religiao,5,29,88,Religion,NA,NA,NA
+28392,spirituality-etc,5,35,86,Spirituality,NA,NA,NA
+31062,tr-non-fiction,5,24,88,Non-fiction,Nonfiction,NA,NA
+963,2fiction,4,13,93,Fiction,Literature,NA,NA
+1315,a-fantasy,4,12,88,Fantasy,NA,NA,NA
+8200,cookboooks,4,10,95,Cookbooks,NA,NA,NA
+9088,dc-graphic-novels,4,15,90,Graphic Novels,Manga,NA,NA
+9098,dccomics,4,8,86,Comics,NA,NA,NA
+10098,e-business,4,3,89,Business,NA,NA,NA
+14513,historical-fiction-wwii,4,16,88,Historical Fiction,NA,NA,NA
+15975,j-non-fiction,4,24,92,Non-fiction,Nonfiction,NA,NA
+21215,naval-historical-fiction,4,16,86,Historical Fiction,NA,NA,NA
+21507,nf-cookbooks,4,10,86,Cookbooks,NA,NA,NA
+27751,sience-fiction,4,32,97,Science Fiction,Sci-Fi,SF,SFF
+31,-history,3,17,100,History,NA,NA,NA
+155,1-fiction,3,13,88,Fiction,Literature,NA,NA
+990,3-fiction,3,13,88,Fiction,Literature,NA,NA
+1115,5-cookbooks,3,10,90,Cookbooks,NA,NA,NA
+1130,5-thriller,3,37,89,Thriller,NA,NA,NA
+3229,asian-historical-fiction,3,16,86,Historical Fiction,NA,NA,NA
+4048,bd-graphic-novels,3,15,90,Graphic Novels,Manga,NA,NA
+6731,chica-lit,3,4,89,Chick Lit,NA,NA,NA
+7767,comic-sf,3,8,86,Comics,NA,NA,NA
+11894,fiktion,3,13,86,Fiction,Literature,NA,NA
+12744,g-paranormal,3,25,91,Paranormal,NA,NA,NA
+14489,historical-fiction-adult,3,16,86,Historical Fiction,NA,NA,NA
+14504,historical-fiction-roman,3,16,86,Historical Fiction,NA,NA,NA
+14509,historical-fiction-us,3,16,92,Historical Fiction,NA,NA,NA
+15949,j-biography,3,2,90,Biography,NA,NA,NA
+21683,non-diction,3,24,91,Non-fiction,Nonfiction,NA,NA
+23520,philsophy,3,26,95,Philosophy,NA,NA,NA
+23833,poetry-5,3,27,86,Poetry,NA,NA,NA
+26844,science-fiction-hard,3,32,86,Science Fiction,Sci-Fi,SF,SFF
+26886,sciency,3,31,86,Science,NA,NA,NA
+30357,thrill,3,37,86,Thriller,NA,NA,NA
+25,-fiction,2,13,100,Fiction,Literature,NA,NA
+565,2-business,2,3,89,Business,NA,NA,NA
+1067,4-graphic-novels,2,15,93,Graphic Novels,Manga,NA,NA
+1118,5-poetry,2,27,86,Poetry,NA,NA,NA
+1272,_comics,2,8,92,Comics,NA,NA,NA
+1285,_poetry,2,27,92,Poetry,NA,NA,NA
+5950,busienss,2,3,88,Business,NA,NA,NA
+7078,christian-,2,6,100,Christian,NA,NA,NA
+7387,clasic,2,7,86,Classics,NA,NA,NA
+8129,cookboks,2,10,94,Cookbooks,NA,NA,NA
+11267,fanasty,2,12,86,Fantasy,NA,NA,NA
+11268,fanatasy,2,12,93,Fantasy,NA,NA,NA
+12731,g-fiction,2,13,88,Fiction,Literature,NA,NA
+12735,g-history,2,17,88,History,NA,NA,NA
+12746,g-poetry,2,27,86,Poetry,NA,NA,NA
+12754,g_fantasy,2,12,88,Fantasy,NA,NA,NA
+14512,historical-fiction-ww2,2,16,90,Historical Fiction,NA,NA,NA
+14514,historical-ficton,2,16,97,Historical Fiction,NA,NA,NA
+22998,paranormals,2,25,95,Paranormal,NA,NA,NA
+28383,spiritualist,2,35,92,Spirituality,NA,NA,NA
+29194,t-christian,2,6,90,Christian,NA,NA,NA
+32005,w-psychology,2,28,91,Psychology,NA,NA,NA
+32948,x-poetry,2,27,86,Poetry,NA,NA,NA
+1001,3-poetry,1,27,86,Poetry,NA,NA,NA
+1159,52-non-fiction,1,24,88,Non-fiction,Nonfiction,NA,NA
+1399,a_fiction,1,13,88,Fiction,Literature,NA,NA
+1794,ag-young-adult,1,39,88,Young Adult,YA,NA,NA
+3729,b_comics,1,8,86,Comics,NA,NA,NA
+6065,c-paranormal,1,25,91,Paranormal,NA,NA,NA
+7212,christiantbr,1,6,86,Christian,NA,NA,NA
+7479,classicy,1,7,88,Classics,NA,NA,NA
+8053,contemporany,1,9,92,Contemporary,NA,NA,NA
+8201,cookbpoks,1,10,89,Cookbooks,NA,NA,NA
+11722,fic-historical,1,16,88,Historical Fiction,NA,NA,NA
+11742,fictioln,1,13,93,Fiction,Literature,NA,NA
+13590,graphic-novelties,1,15,90,Graphic Novels,Manga,NA,NA
+13601,graphics-novels,1,15,97,Graphic Novels,Manga,NA,NA
+14486,historical-fict,1,16,91,Historical Fiction,NA,NA,NA
+14822,horror-3,1,18,86,Horror,NA,NA,NA
+21504,nf-biography,1,2,86,Biography,NA,NA,NA
+23518,philosphopy,1,26,86,Philosophy,NA,NA,NA
+28061,soft-science-fiction,1,32,86,Science Fiction,Sci-Fi,SF,SFF
+28403,spiritualität,1,35,92,Spirituality,NA,NA,NA
+29333,tbr-historical-fiction,1,16,90,Historical Fiction,NA,NA,NA
+29364,tbr-science-fiction,1,32,88,Science Fiction,Sci-Fi,SF,SFF
+29520,temporary,1,9,86,Contemporary,NA,NA,NA
+30385,thrillere,1,37,94,Thriller,NA,NA,NA
+32976,y-fantasy,1,12,88,Fantasy,NA,NA,NA
+33155,younger-adults,1,39,88,Young Adult,YA,NA,NA
+33201,z-fiction,1,13,88,Fiction,Literature,NA,NA
+33281,zspirituality,1,35,96,Spirituality,NA,NA,NA
+32989,ya,898334,39,100,Young Adult,YA,NA,NA
+26771,sci-fi,597325,32,100,Science Fiction,Sci-Fi,SF,SFF
+21773,nonfiction,371049,24,100,Non-fiction,Nonfiction,NA,NA
+15048,humor,262340,19,100,Humor and Comedy,Humor,Comedy,NA
+18367,literature,249441,13,100,Fiction,Literature,NA,NA
+15067,humour,61915,19,91,Humor and Comedy,Humor,Comedy,NA
+18001,lgbt,38762,14,100,Gay and Lesbian,LGBT,NA,NA
+18011,lgbtq,20428,14,89,Gay and Lesbian,LGBT,NA,NA
+18338,literatura,865,13,90,Fiction,Literature,NA,NA
+15125,húmor,704,19,89,Humor and Comedy,Humor,Comedy,NA
+33028,ya-literature,254,13,87,Fiction,Literature,NA,NA
+18395,literatuur,196,13,90,Fiction,Literature,NA,NA
+33033,ya-nonfiction,55,24,87,Non-fiction,Nonfiction,NA,NA
+19557,mc-literature,27,13,87,Fiction,Literature,NA,NA
+18337,literatur,23,13,95,Fiction,Literature,NA,NA
+27725,si-fi,22,32,91,Science Fiction,Sci-Fi,SF,SFF
+18401,litterature,18,13,95,Fiction,Literature,NA,NA
+18425,littérature,13,13,90,Fiction,Literature,NA,NA
+15068,humour-,12,19,91,Humor and Comedy,Humor,Comedy,NA
+26810,sci-fic,7,32,92,Science Fiction,Sci-Fi,SF,SFF
+31649,us-literature,6,13,87,Fiction,Literature,NA,NA
+21761,non_fiction,4,24,95,Non-fiction,Nonfiction,NA,NA
+2760,ap-literature,3,13,87,Fiction,Literature,NA,NA
+26668,sc-fi,3,32,91,Science Fiction,Sci-Fi,SF,SFF
+531,1non-fiction,2,24,91,Non-fiction,Nonfiction,NA,NA
+12748,g-sci-fi,2,32,86,Science Fiction,Sci-Fi,SF,SFF
+18368,literature-,2,13,100,Fiction,Literature,NA,NA
+18400,litteratur,2,13,90,Fiction,Literature,NA,NA
+26893,scif-fi,2,32,92,Science Fiction,Sci-Fi,SF,SFF
+61,0-nonfiction,1,24,91,Non-fiction,Nonfiction,NA,NA
+130,0nonfiction,1,24,95,Non-fiction,Nonfiction,NA,NA
+6064,c-nonfiction,1,24,91,Non-fiction,Nonfiction,NA,NA
+21511,nf-literature,1,13,87,Fiction,Literature,NA,NA
+21765,nonfction,1,24,95,Non-fiction,Nonfiction,NA,NA
+31434,uk-literature,1,13,87,Fiction,Literature,NA,NA
+7725,comedy,56440,19,100,Humor and Comedy,Humor,Comedy,NA
+27398,sf,53951,32,100,Science Fiction,Sci-Fi,SF,SFF

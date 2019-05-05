@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1557069578590.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "897093847",
+    "id" : "80CEAC5E",
+    "lastKnownWriteTime" : 1557096873,
+    "last_content_update" : 1557096873125,
+    "path" : "C:/Erika/Data Incubator/Challenge/book_recommender/TDI_Challenge.Rmd",
+    "project_path" : "TDI_Challenge.Rmd",
+    "properties" : {
+        "cursorPosition" : "243,296",
+        "last_setup_crc32" : "8CDDE1A8583968c6",
+        "scrollLine" : "217",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,17 @@
+library(tidyverse)
+library(FNN)
+set.seed(123)
+
+ratings <- read_csv('data/ratings.csv')
+clusters <- read_csv('data/clusters.csv')
+
+ratings_matrix <- ratings %>% spread(key=book_id,value=rating)
+
+#KNN with no clustering
+train <- sample(1:nrow(ratings_matrix),nrow(ratings_matrix)*0.8)
+ratings_train <- ratings_matrix[train,]
+ratings_test <- ratings_matrix[-train,]
+
+#KNN for book 1
+i <- 1
+knn <- knn.reg(ratings_train[,-1],ratings_test[,-1],ratings_train[,1],k=i)

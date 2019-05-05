@@ -1,0 +1,512 @@
+}
+}
+}
+#Initialization of FuzzMatcher class
+fuzzy <- FuzzMatcher$new()
+#Define minimum certainty of match
+match_threshold <- 90
+#Loop to find closest matching tag names
+match_tags <- tags_final
+match_tags$match <- NA
+match_tags$max_score <- -1
+View(match_tags)
+for (i in 1:nrow(match_tags)) {
+for (j in 1:nrow(match_tags)) {
+if (i==j) {
+next
+} else {
+score <- fuzzy$Token_set_ratio(string1=match_tags$tag_name[i],string2=match_tags$tag_name[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- match_tags$tag_name[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+}
+tags_filter <- popular_tags[!(grepl('.*read.*',popular_tags$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*own.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*buy.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*audio.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*ebook.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*kindle.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*library.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*club.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*bookshelf.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*finished.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*mine.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*my.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*school.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*favo[u]rite.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*finish.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*e-book.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*star.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*series.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*/d*.*',tags_filter$tag_name)),]
+View(tags_filter)
+tags_filter <- tags_filter[!(grepl('.*favo[u]rite.*',tags_filter$tag_name)),]
+tags_filter <- popular_tags[!(grepl('.*read.*',popular_tags$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*own.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*buy.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*audio.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*ebook.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*kindle.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*library.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*club.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*bookshelf.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*finished.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*mine.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*my.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*school.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*favo[u]rite.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*favo[u]rite.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*finish.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*e-book.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*star.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*series.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*/d*.*',tags_filter$tag_name)),]
+View(tags_filter)
+tags_filter <- tags_filter[!(grepl('.*\\d*.*',tags_filter$tag_name)),]
+tags_filter <- popular_tags[!(grepl('.*read.*',popular_tags$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*own.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*buy.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*audio.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*ebook.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*kindle.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*library.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*club.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*bookshelf.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*finished.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*mine.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*my.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*school.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*favo[u]rite.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*finish.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*e-book.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*star.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*series.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*[0-9]*.*',tags_filter$tag_name)),]
+tags_filter <- popular_tags[!(grepl('.*read.*',popular_tags$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*own.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*buy.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*audio.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*ebook.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*kindle.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*library.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*club.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*bookshelf.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*finished.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*mine.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*my.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*school.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*favorite.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*favo[u]rite.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*fav[o|ou]rite.*',tags_filter$tag_name)),]
+tags_filter <- popular_tags[!(grepl('.*read.*',popular_tags$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*own.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*buy.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*audio.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*ebook.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*kindle.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*library.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*club.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*bookshelf.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*finished.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*mine.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*my.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*school.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*fav[o|ou]rite.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*finish.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*e-book.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*star.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*series.*',tags_filter$tag_name)),]
+View(tags_filter)
+tags_filter <- tags_filter[!(grepl('.*audible.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*borrowed.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*maybe.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*have.*',tags_filter$tag_name)),]
+tags_filter <- tags_filter[!(grepl('.*gilmore.*',tags_filter$tag_name)),]
+tags_final <- tags_filter %>% filter(tag_count>1000)
+#Initialization of FuzzMatcher class
+fuzzy <- FuzzMatcher$new()
+#Define minimum certainty of match
+match_threshold <- 90
+#Loop to find closest matching tag names
+match_tags <- tags_final
+match_tags$match <- NA
+match_tags$max_score <- -1
+View(match_tags)
+for (i in 1:nrow(match_tags)) {
+for (j in 1:nrow(match_tags)) {
+if (i==j) {
+next
+} else {
+score <- fuzzy$Token_set_ratio(string1=match_tags$tag_name[i],string2=match_tags$tag_name[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- match_tags$tag_name[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+}
+View(popular_tags)
+genres <- read_csv('data/genres.csv')
+library(tidyverse)
+library(stringr)
+library(fuzzywuzzyR)
+books <- read_csv('data/books.csv')
+book_tags <- read_csv('data/book_tags.csv')
+tags <- read_csv('data/tags.csv')
+genres <- read_csv('data/genres.csv')
+book_tags_wnames <- inner_join(book_tags,tags)
+popular_tags <- book_tags_wnames %>% group_by(tag_id,tag_name) %>% summarize(tag_count=sum(count)) %>% arrange(desc(tag_count))
+#Initialization of FuzzMatcher class
+fuzzy <- FuzzMatcher$new()
+#Define minimum certainty of match
+match_threshold <- 90
+#Loop to find closest matching tag names
+match_tags <- popular_tags
+match_tags$match <- NA
+match_tags$max_score <- -1
+View(match_tags)
+for (i in 1:nrow(match_tags)) {
+for (j in 1:nrow(genres)) {
+score <- fuzzy$Token_set_ratio(string1=match_tags$tag_name[i],string2=genres$tag_name[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- genres$tag_name[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+for (i in 1:nrow(match_tags)) {
+for (j in 1:nrow(genres)) {
+score <- fuzzy$Token_set_ratio(string1=match_tags$tag_name[i],string2=genres$Genre[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- genres$Genre[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+genres <- read_csv('data/genres.csv')
+#Loop to find closest matching tag names
+match_tags <- popular_tags
+match_tags$match <- NA
+match_tags$max_score <- -1
+for (i in 1:nrow(match_tags)) {
+for (j in 1:nrow(genres)) {
+score <- fuzzy$Token_sort_ratio(string1=match_tags$tag_name[i],string2=genres$Genre[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- genres$Genre[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+for (i in 1:nrow(match_tags)) {
+for (j in 1:nrow(genres)) {
+score <- fuzzy$Token_sort_ratio(string1=match_tags$tag_name[i],string2=genres$Genre[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- genres$GenreID[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+#Loop to find closest matching tag names
+match_tags <- popular_tags
+match_tags$match <- NA
+match_tags$max_score <- -1
+for (i in 1:nrow(match_tags)) {
+for (j in 1:nrow(genres)) {
+score <- fuzzy$Token_sort_ratio(string1=match_tags$tag_name[i],string2=genres$Genre[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- genres$GenreID[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+View(match_tags)
+#Loop to find closest matching tag names
+match_tags <- popular_tags
+match_tags$match <- NA
+match_tags$max_score <- -1
+for (i in 1:nrow(match_tags)) {
+for (j in 1:nrow(genres)) {
+score <- fuzzy$Token_sort_ratio(string1=match_tags$tag_name[i],string2=genres$Genre[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- genres$GenreID[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+genres <- read_csv('data/genres.csv')
+#Remove foreign language tags
+popular_tags <- popular_tags %>% filter(!(tag_id %in% seq(33309:34244)))
+match_tags <- match_tags %>% filter(!(tag_id %in% seq(33309:34244)))
+#Make table of matched tags to keep
+keep_tags <- match_tags %>% filter(!is.na(match))
+#Match on first alternate genre label
+match_tags <- match_tags %>% filter(is.na(match))
+View(match_tags)
+#Remove foreign language tags
+popular_tags <- popular_tags %>% filter(!(tag_id %in% seq(33309:34244)))
+View(popular_tags)
+popular_tags <- book_tags_wnames %>% group_by(tag_id,tag_name) %>% summarize(tag_count=sum(count)) %>% arrange(desc(tag_count))
+popular_tags[popular_tags$tag_id %in% (33309:34244),]
+#Remove foreign language tags
+popular_tags <- popular_tags %>% filter(!(tag_id %in% (33309:34244))
+#Remove foreign language tags
+popular_tags <- popular_tags %>% filter(!(tag_id %in% (33309:34244)))
+View(popular_tags)
+match_tags <- match_tags %>% filter(!(tag_id %in% (33309:34244)))
+#Match against main genre
+for (i in 1:nrow(match_tags)) {
+for (j in 1:nrow(genres)) {
+score <- fuzzy$Token_sort_ratio(string1=match_tags$tag_name[i],string2=genres$Genre[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- genres$GenreID[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+#Make table of matched tags to keep
+keep_tags <- rbind(keep_tags,match_tags %>% filter(!is.na(match)))
+#Match on second alternate genre label
+match_tags <- match_tags %>% filter(is.na(match))
+for (i in 1:nrow(match_tags)) {
+print(i)
+for (j in 1:nrow(alt1)) {
+score <- fuzzy$Token_sort_ratio(string1=match_tags$tag_name[i],string2=alt1$Alt1[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- alt1$GenreID[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+#Match against main genre
+for (i in 1:nrow(match_tags)) {
+print(i)
+for (j in 1:nrow(genres)) {
+score <- fuzzy$Token_sort_ratio(string1=match_tags$tag_name[i],string2=genres$Genre[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- genres$GenreID[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+library(tidyverse)
+library(stringr)
+library(fuzzywuzzyR)
+books <- read_csv('data/books.csv')
+book_tags <- read_csv('data/book_tags.csv')
+tags <- read_csv('data/tags.csv')
+genres <- read_csv('data/genres.csv')
+book_tags_wnames <- inner_join(book_tags,tags)
+popular_tags <- book_tags_wnames %>% group_by(tag_id,tag_name) %>% summarize(tag_count=sum(count)) %>% arrange(desc(tag_count))
+#Remove foreign language tags
+popular_tags <- popular_tags %>% filter(!(tag_id %in% (33309:34244)))
+match_tags <- match_tags %>% filter(!(tag_id %in% (33309:34244)))
+#Initialization of FuzzMatcher class
+fuzzy <- FuzzMatcher$new()
+#Define minimum certainty of match
+match_threshold <- 90
+#Loop to find closest matching tag names
+match_tags <- popular_tags
+match_tags$match <- NA
+match_tags$max_score <- -1
+View(match_tags)
+#Match against main genre
+for (i in 1:nrow(match_tags)) {
+print(i)
+for (j in 1:nrow(genres)) {
+score <- fuzzy$Token_sort_ratio(string1=match_tags$tag_name[i],string2=genres$Genre[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- genres$GenreID[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+#Make table of matched tags to keep
+keep_tags <- match_tags %>% filter(!is.na(match))
+View(keep_tags)
+match_tags %>% filter(is.na(match))
+#Match on first alternate genre label
+match_tags <- match_tags %>% filter(is.na(match))
+alt1 <- genre %>% filter(!is.na(Alt1))
+for (i in 1:nrow(match_tags)) {
+print(i)
+for (j in 1:nrow(alt1)) {
+score <- fuzzy$Token_sort_ratio(string1=match_tags$tag_name[i],string2=alt1$Alt1[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- alt1$GenreID[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+alt1 <- genres %>% filter(!is.na(Alt1))
+for (i in 1:nrow(match_tags)) {
+print(i)
+for (j in 1:nrow(alt1)) {
+score <- fuzzy$Token_sort_ratio(string1=match_tags$tag_name[i],string2=alt1$Alt1[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- alt1$GenreID[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+match_tags %>% filter(!is.na(match))
+#Make table of matched tags to keep
+keep_tags <- rbind(keep_tags,match_tags %>% filter(!is.na(match)))
+#Match on second alternate genre label
+match_tags <- match_tags %>% filter(is.na(match))
+alt2 <- genres %>% filter(!is.na(Alt2))
+for (i in 1:nrow(match_tags)) {
+print(i)
+for (j in 1:nrow(alt2)) {
+score <- fuzzy$Token_sort_ratio(string1=match_tags$tag_name[i],string2=alt2$Alt2[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- alt2$GenreID[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+match_tags %>% filter(is.na(match)
+match_tags %>% filter(is.na(match))
+match_tags %>% filter(!is.na(match))
+#Make table of matched tags to keep
+keep_tags <- rbind(keep_tags,match_tags %>% filter(!is.na(match)))
+#Match on second alternate genre label
+match_tags <- match_tags %>% filter(is.na(match))
+View(match_tags)
+#Match kept tags with books
+inner_join(book_tags,keep_tags)
+#Match kept tags with books
+inner_join(book_tags,keep_tags) %>% group_by(goodreads_book_id) %>% summarize()
+#Match kept tags with books
+left_join(book_tags,keep_tags) %>% filter(is.na(match))
+#Match kept tags with books
+inner_join(book_tags,keep_tags) %>% group_by(goodreads_book_id) %>% summarize()
+View(books)
+#Match kept tags with books
+temp <- inner_join(book_tags,keep_tags) %>% group_by(goodreads_book_id) %>% summarize()
+left_join(books,temp)
+left_join(books,temp) %>% filter(is.na(match))
+left_join(books,temp)
+temp <- left_join(books,temp)
+#Match kept tags with books
+temp <- inner_join(book_tags,keep_tags) %>% group_by(goodreads_book_id,match) %>% summarize()
+temp <- left_join(books,temp)
+temp %>% filter(is.na(match))
+temp <- left_join(books,temp) %>% filter(is.na(match))
+View(temp)
+book_tags_wnames %>% filter(goodreads_book_id==15749186)
+tags <- book_tags_wnames %>% filter(goodreads_book_id==15749186)
+View(tags)
+genres
+View(genres)
+#Loop to find closest matching tag names
+match_tags <- popular_tags
+match_tags$match <- NA
+match_tags$max_score <- -1
+#Match against main genre
+for (i in 1:nrow(match_tags)) {
+print(i)
+for (j in 1:nrow(genres)) {
+score <- fuzzy$Token_set_ratio(string1=match_tags$tag_name[i],string2=genres$Genre[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- genres$GenreID[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+write_csv(keep_tags,'keep_tags.csv')
+#Make table of matched tags to keep
+keep_tags <- match_tags %>% filter(!is.na(match))
+#Match on first alternate genre label
+match_tags <- match_tags %>% filter(is.na(match))
+alt1 <- genres %>% filter(!is.na(Alt1))
+for (i in 1:nrow(match_tags)) {
+print(i)
+for (j in 1:nrow(alt1)) {
+score <- fuzzy$Token_set_ratio(string1=match_tags$tag_name[i],string2=alt1$Alt1[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- alt1$GenreID[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+#Make table of matched tags to keep
+keep_tags <- rbind(keep_tags,match_tags %>% filter(!is.na(match)))
+#Match on second alternate genre label
+match_tags <- match_tags %>% filter(is.na(match))
+alt2 <- genres %>% filter(!is.na(Alt2))
+for (i in 1:nrow(match_tags)) {
+print(i)
+for (j in 1:nrow(alt2)) {
+score <- fuzzy$Token_set_ratio(string1=match_tags$tag_name[i],string2=alt2$Alt2[j])
+if (score>match_threshold && score>match_tags$max_score[i]) {
+match_tags$match[i] <- alt2$GenreID[j]
+match_tags$max_score[i] <- score
+}
+}
+}
+#Make table of matched tags to keep
+keep_tags <- rbind(keep_tags,match_tags %>% filter(!is.na(match)))
+inner_join(keep_tags,genres)
+inner_join(keep_tags,genres,by=c('match','GenreID'))
+inner_join(keep_tags,genres,by=c('match'='GenreID'))
+temp <- inner_join(keep_tags,genres,by=c('match'='GenreID'))
+View(temp)
+original_keep <- read_csv('keep_tags.csv')
+temp <- inner_join(original_keep,genres,by=c('match'='GenreID'))
+View(temp)
+write_csv(keep_tags,'keep_tags2.csv')
+keep_tags <- read_csv('keep_tags.csv')
+keep_tags <- inner_join(original_keep,genres,by=c('match'='GenreID'))
+#Match kept tags with books
+temp <- inner_join(book_tags,keep_tags) %>% group_by(goodreads_book_id,match) %>% summarize()
+View(temp)
+#Match kept tags with books
+temp <- inner_join(book_tags,keep_tags)
+View(temp)
+temp %>% group_by(goodreads_book_id,Genre) %>% summarize(user_tag_count=sum(count))
+?top_n
+temp %>% group_by(goodreads_book_id,Genre) %>% summarize(user_tag_count=sum(count)) %>%
+top_n(group_by(goodreads_book_id),3,user_tag_count)
+temp %>% group_by(goodreads_book_id,Genre) %>% summarize(user_tag_count=sum(count)) %>%
+top_n(group_by(goodreads_book_id),3)
+temp %>% group_by(goodreads_book_id,Genre) %>% summarize(user_tag_count=sum(count)) %>% group_by(goodreads_book_id) %>%
+top_n(3,user_tag_count)
+temp %>% group_by(goodreads_book_id,Genre) %>% summarize(user_tag_count=sum(count)) %>% arrange(desc(user_tag_count)) #%>%
+temp %>% group_by(goodreads_book_id,Genre) %>% summarize(user_tag_count=sum(count)) %>% arrange(goodreads_book_id,desc(user_tag_count)) #%>%
+temp %>% group_by(goodreads_book_id,Genre) %>% summarize(user_tag_count=sum(count)) %>% arrange(goodreads_book_id,desc(user_tag_count)) %>%
+group_by(goodreads_book_id) %>% top_n(3,user_tag_count)
+#Match kept tags with books
+book_genres <- inner_join(book_tags,keep_tags)
+book_genres <- book_genres %>% group_by(goodreads_book_id,Genre) %>% summarize(user_tag_count=sum(count)) %>% arrange(goodreads_book_id,desc(user_tag_count)) %>%
+group_by(goodreads_book_id) %>% top_n(3,user_tag_count)
+View(book_genres)
+books %>% filter(goodreads_book_id==386)
+temp <- books %>% filter(goodreads_book_id==386)
+View(temp)
+book_genres <- book_genres %>% group_by(goodreads_book_id,Genre) %>% summarize(user_tag_count=sum(count)) %>% arrange(goodreads_book_id,desc(user_tag_count)) %>%
+group_by(goodreads_book_id) %>% top_n(2,user_tag_count)
+#Match kept tags with books
+book_genres <- inner_join(book_tags,keep_tags)
+book_genres <- book_genres %>% group_by(goodreads_book_id,Genre) %>% summarize(user_tag_count=sum(count)) %>% arrange(goodreads_book_id,desc(user_tag_count)) %>%
+group_by(goodreads_book_id) %>% top_n(2,user_tag_count)
+View(book_genres)
+library(tidyverse)
+ratings <- read_csv('data/ratings.csv')
+clusters <- read_csv('data/clusters.csv')
+ratings_matrix <- ratings %>% spread(key=book_id,value=rating)
+install.packages("FNN")
+library(FNN)
+set.seed(123)
+#KNN with no clustering
+train <- sample(1:nrow(ratings_matrix),nrow(ratings_matrix)*0.8)
+ratings_train <- ratings_matrix[train,]
+ratings_test <- ratings_matrix[-train,]
+?knn.reg
+#KNN for book 1
+i <- 1
+knn <- knn.reg(ratings_train[,-1],ratings_test[,-1],ratings_train[,1],k=i)
+rm(ratings)
+knn <- knn.reg(ratings_train[,-1],ratings_test[,-1],ratings_train[,1],k=i)

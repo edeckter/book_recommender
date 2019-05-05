@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1556998300199.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "38A99A2D",
+    "lastKnownWriteTime" : 1557024522,
+    "last_content_update" : 1557024522450,
+    "path" : "C:/Erika/Data Incubator/Challenge/book_recommender/kmeans.R",
+    "project_path" : "kmeans.R",
+    "properties" : {
+        "cursorPosition" : "60,56",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

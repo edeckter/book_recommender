@@ -1,0 +1,61 @@
+library(tidyverse)
+set.seed(123)
+
+books <- read_csv('data/books_final.csv')
+
+books_filtered <- books %>% select(book_id,title,first_author,average_rating,ratings_count=work_ratings_count,Art:`Young Adult`)
+
+#Normalize data using min/max normalization
+summary <- 
+  data.frame(rbind(min=apply(books_filtered[,4:ncol(books_filtered)],2,min),
+        max=apply(books_filtered[,4:ncol(books_filtered)],2,max),
+        range=apply(books_filtered[,4:ncol(books_filtered)],2,max)-apply(books_filtered[,4:ncol(books_filtered)],2,min)))
+
+for (i in 4:ncol(books_filtered)) {
+  j <- i-3
+  books_filtered[,i] <- (books_filtered[,i]-summary[1,j])/summary[3,j]
+}
+
+#Run k-means clustering algorithm
+k_5 <- kmeans(books_filtered[,5:44],centers=5, nstart=5, iter.max=100)
+k_10 <- kmeans(books_filtered[,5:44],centers=10, nstart=5, iter.max=100)
+k_20 <- kmeans(books_filtered[,5:44],centers=20, nstart=5, iter.max=100)
+k_30 <- kmeans(books_filtered[,5:44],centers=30, nstart=5, iter.max=100)
+k_40 <- kmeans(books_filtered[,5:44],centers=40, nstart=5, iter.max=100)
+k_50 <- kmeans(books_filtered[,5:44],centers=50, nstart=5, iter.max=100)
+
+compare_kmeans <- data.frame(k=c(5,10,20,30,40,50),
+                             `between_SS/total_SS`=c(0.179,0.295,0.439,0.571,0.630,0.676))
+
+ggplot(data=compare_kmeans,aes(x=k,y=`between_SS.total_SS`)) + 
+  geom_point() +
+  geom_line() +
+  scale_y_continuous(limits=c(0.15,0.7),breaks=seq(0.15,0.7,by=0.05),label=scales::percent) +
+  scale_x_continuous(limits=c(0,50), breaks=seq(0,50,by=10)) +
+  labs(title='Homogeneity of Clusters Increases as Number of Clusters Increases',x='Number of Clusters (k)',y='Between-Cluster Variation/Within-Cluster Variation') +
+  theme(axis.ticks.y=element_blank(),
+        panel.background=element_rect(fill='white'),
+        panel.grid.major.y=element_line(color='gray'),
+        legend.position='none')
+
+#Examine clusters
+books_filtered$k_5 <- k_5$cluster
+books_filtered$k_10 <- k_10$cluster
+books_filtered$k_20 <- k_20$cluster
+books_filtered$k_30 <- k_30$cluster
+books_filtered$k_40 <- k_40$cluster
+books_filtered$k_50 <- k_50$cluster
+
+#Centers
+k5_centers <- data.frame(cbind(Cluster=row(k_5$centers)[,1],k_5$centers)) %>% gather(key='Variable',value='Center',-Cluster)
+k10_centers <- data.frame(cbind(Cluster=row(k_10$centers)[,1],k_10$centers)) %>% gather(key='Variable',value='Center',-Cluster)
+k50_centers <- data.frame(cbind(Cluster=row(k_50$centers)[,1],k_50$centers)) %>% gather(key='Variable',value='Center',-Cluster)
+
+
+ggplot(k5_centers) +
+  geom_bar(aes(x=Variable,y=Center),stat='identity') +
+  coord_flip() +
+  facet_wrap(~Cluster)
+
+#Write cluster assignments out to disk
+write_csv(select(books_filtered,book_id,k_5:k_50),'data/clusters.csv')

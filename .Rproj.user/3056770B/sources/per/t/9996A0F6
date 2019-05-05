@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1557026022091.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2005453502",
+    "id" : "9996A0F6",
+    "lastKnownWriteTime" : 1557094867,
+    "last_content_update" : 1557094867215,
+    "path" : "C:/Erika/Data Incubator/Challenge/book_recommender/recommender.R",
+    "project_path" : "recommender.R",
+    "properties" : {
+        "cursorPosition" : "52,0",
+        "scrollLine" : "33",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

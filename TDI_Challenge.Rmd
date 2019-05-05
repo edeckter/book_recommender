@@ -1,0 +1,384 @@
+---
+title: "The Data Incubator Challenge - Summer 2019 Session"
+author: "Erika Deckter"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width=10, fig.height=10)
+library(tidyverse)
+library(stringr)
+library(knitr)
+library(recommenderlab)
+```
+
+##Project Proposal
+As an avid reader, I thought it would be interesting to build a book recommender system for my project.  There are a lot of movie and television recommender systems, but recommenders for books are far less common.  
+
+The dataset for this project is from the following location:   [https://github.com/zygmuntz/goodbooks-10k</a>](https://github.com/zygmuntz/goodbooks-10k)  
+
+This is a dataset of approximately 6 million ratings for a set of 10,000 books from [Goodreads](https://www.goodreads.com/).  
+
+##Analysis Outline
+I could build a recommender system that finds the closest user to the user of interest across all 10,000 books; however, this does not take into account any type of categorization for the books.  As such, prior to using the data to feed a recommender, I have decided to run a K-Means Clustering algorithm in order to group the books into clusters.  This unsupervised algorithm will use book popularity (number of ratings) and genre in order to categorize the books.  This has two advantages: 1) It allows the user to get rankings based on categories so they can select books based on thier particular preference/mood at the time (for example, let's say that a user normally reads historical fiction but is in the mood to read a science fiction book - this will allow the user to get recommendations for that particular type of book) and 2) by making recommendations on groups of similar books, hopefully the recommendations will be more accurate.
+
+##Data Preparation
+The data are fairly clean in terms of not having any missing/nonsensical data; however, there was one major hurdle that I wanted to address before starting to work with the data in earnest.  The data contains user-defined "tags" for each book, but unfortunately these tags are in non-standard format (freeform text).
+
+###Genres  
+In order to assign books to genres, I went to the [Goodreads genre page](https://www.goodreads.com/genres) and cretaed a list of 39 of their general categories.  I also added alternative names/titles for several of the genres (e.g., Science Fiction and Sci-Fi) to help improve the matching.  The table below shows the main genres and the alternatives.
+```{r genres, include=FALSE}
+genres <- read_csv('data/genres.csv')
+```
+```{r genre table,echo=FALSE}
+kable(genres,
+      caption='Table 1: Standardize Genre List for Goodreads Data')
+```  
+
+I aggregated the user tags into one master list, then removed the tags that were in foreign languages that don't use the Roman alphabet (since those would be impossible to match to my primary categories).  I then implemented fuzzy matching in order to assign as many tags as possible to one of the genre categories.  This was done using the *fuzzywuzzyR* package.  
+```{r tag matching, include=FALSE}
+#Read in data
+books <- read_csv('data/books.csv')
+book_tags <- read_csv('data/book_tags.csv')
+tags <- read_csv('data/tags.csv')
+genres <- read_csv('data/genres.csv')
+
+#Call fuzzy matching code
+#source('fuzzy_match.R')
+
+#Read table of tags to keep back in
+keep_tags <- read_csv('data/keep_tags.csv')
+```
+  
+Finally, I did a visual inspection of the matches and updated a few matches, producing a final master list of mappings from the original tags to the standardized genres.  
+```{r book genres, include=FALSE}
+#Match kept tags with books
+book_genres <- inner_join(book_tags,keep_tags)
+book_genres <- book_genres %>% group_by(goodreads_book_id,GenreID=match,Genre) %>% summarize(user_tag_count=sum(count)) %>% arrange(goodreads_book_id,desc(user_tag_count)) %>%
+  group_by(goodreads_book_id) %>% top_n(3,user_tag_count)
+
+#Check for books without at least one genre
+left_join(books,book_genres) %>% filter(is.na(Genre))
+
+#Join original book lists with new genres
+books <- inner_join(books,book_genres) %>% arrange(book_id,GenreID)
+
+books_final <- books %>% select(-GenreID) %>% spread(key='Genre',value=user_tag_count)
+
+#Set NAs to 0 for all genres
+for (i in 24:ncol(books_final)) {
+  books_final[is.na(books_final[,i]),i] <- 0
+}
+```
+Since each book had many user tags, I assigned each book to the top 3 genres based on user tag counts.  If there was a tie, the additional genres were kept (i.e., there are a small percentage of books that are assigned to 4 or even 5 genres).  
+
+After matching the books to the new genres, I confirmed that each book had at least one genre.  
+
+The final table has a row for each book and a column for each genre.  The assigned genres have the count of user tags assigned to that genre; however, the genres that were not in the top 3 had all NAs.  The final clean-up step was to convert the NAs to 0.  
+
+###Authors
+In many instances, the author field contained multiple authors, separated by commas.  Based on visual inspection, many of the second and third authors were foreword writers, illustrators, etc.  As such, I chose to separate out the first author for each book.  I did this using regular expressions, creating a new column that had the first author only.
+```{r authors, include=FALSE}
+#Clean up author names
+books_final$first_author <- str_match(books_final$authors,'(^[\\w|\\s|.]*),?')[,2]
+```
+
+##Exploratory Data Analysis  
+The plots below visualize some of the key aspects of the data set.
+```{r genre plot, echo=FALSE, }
+#Plot books by genre
+books_by_genre <- enframe(apply(books_final[,24:(ncol(books_final)-1)],2,function(x) {sum(x!=0)}))
+
+ggplot(books_by_genre) +
+  geom_bar(aes(x=reorder(name,value),y=value),stat='identity',fill='steelblue') +
+  coord_flip() +
+  scale_y_continuous(limits=c(0,6500),breaks=seq(0,6000,by=1000),expand=c(0,0)) +
+  labs(title='Goodread Books Breakdown by Genre',x='',y='Number of Books',
+       subtitle='Each book was assigned to its top 3 genres based on user tags') +
+  theme(axis.ticks.y=element_blank(),
+        panel.background=element_rect(fill='white'),
+        panel.grid.major.x=element_line(color='gray'),
+        legend.position='none')
+```
+
+Nearly 60% of the books in the data set are fiction, with fantasy being the most popular sub-genre of fiction, followed by young adult (YA) and romance.  This follows my knowledge of general trends of the book market in recent years.  
+
+The next plot shows the 15 most common authors in the 10,000 books and the number of books they have in the data set.  All of these names should look pretty familiar to anyone who follows books.  
+```{r author plot, echo=FALSE}
+#Top 15 authors
+books_final %>% group_by(first_author) %>% summarize(books=n()) %>% top_n(15,books) %>%
+  ggplot() +
+  geom_bar(aes(x=reorder(first_author,books),y=books),stat='identity',fill='steelblue') +
+  coord_flip() +
+  labs(title='Top 15 Authors by Book Count',x='',y='Number of Books') +
+  theme(axis.ticks.y=element_blank(),
+        panel.background=element_rect(fill='white'),
+        panel.grid.major.x=element_line(color='gray'),
+        legend.position='none')
+```
+
+The 15 most rated books are shown in the next plot.    
+```{r most rated data, include=FALSE}
+ratings_data <- books_final %>% group_by(book_id) %>% summarize(ratings=sum(work_ratings_count)) %>% top_n(15,ratings) %>%
+  inner_join(select(books_final,book_id,title,first_author)) %>% mutate(new_title=str_wrap(paste(title,first_author,sep=' by '),width=30))
+```
+```{r most rated, echo=FALSE}
+#Most rated books
+ratings_data %>%
+  ggplot() +
+  geom_bar(aes(x=reorder(new_title,ratings),y=ratings/1000000),stat='identity',fill='steelblue') +
+  coord_flip() +
+  scale_y_continuous(limits=c(0,5),breaks=seq(0,5,by=0.5),expand=c(0,0)) +
+  labs(title='Top 15 Most Rated Books',x='',y='Number of Ratings (in millions)') +
+  theme(axis.ticks.y=element_blank(),
+        panel.background=element_rect(fill='white'),
+        panel.grid.major.x=element_line(color='gray'),
+        legend.position='none')
+```
+
+This shows a mix of classics and contemporary best-sellers, many of which are fantasy, YA or both, consistent with the most popular genres chart.  
+
+The next two plots show the best and worst books, with the most 5-star and 1-star ratings, respectively, as a proportion of total ratings for that book.  In order to be considered for these plots, a book had to have at least 100,000 ratings.  This was to avoid misleading results due to a small number of reviews skewing the rating proportions.  
+```{r best worst data, include=FALSE}
+best_data <- books_final %>% filter(ratings_count>100000) %>% group_by(book_id) %>% summarize(ratings=sum(ratings_5/work_ratings_count)) %>% top_n(15,ratings) %>%
+  inner_join(select(books_final,book_id,title,first_author)) %>% mutate(new_title=str_wrap(paste(title,first_author,sep=' by '),width=40)) 
+
+worst_data <- books_final %>% filter(ratings_count>100000) %>% group_by(book_id) %>% summarize(ratings=sum(ratings_1/work_ratings_count)) %>% top_n(15,ratings) %>%
+  inner_join(select(books_final,book_id,title,first_author)) %>% mutate(new_title=str_wrap(paste(title,first_author,sep=' by '),width=40)) 
+```
+```{r best worst, echo=FALSE}
+#Most 5 star ratings
+best_data %>%
+  ggplot() +
+  geom_bar(aes(x=reorder(new_title,ratings),y=ratings),stat='identity',fill='steelblue') +
+  coord_flip() +
+  scale_y_continuous(limits=c(0,0.85),breaks=seq(0,0.8,by=0.1),labels=scales::percent,expand=c(0,0)) +
+  labs(title='Best Rated Books',subtitle=str_wrap('Books with the most 5-star ratings as a proportion of total ratings (minimum 100,000 ratings)',width=50),
+                                                  x='',y='5-Star Ratings as a Percent of Total Ratings') +
+  theme(axis.ticks.y=element_blank(),
+        panel.background=element_rect(fill='white'),
+        panel.grid.major.x=element_line(color='gray'),
+        legend.position='none')
+
+#Most 1 star ratings
+worst_data %>%
+  ggplot() +
+  geom_bar(aes(x=reorder(new_title,ratings),y=ratings),stat='identity',fill='steelblue') +
+  coord_flip() +
+  scale_y_continuous(limits=c(0,0.20),breaks=seq(0,0.15,by=0.05),labels=scales::percent,expand=c(0,0)) +
+  labs(title='Worst Rated Books',subtitle=str_wrap('Books with the most 1-star ratings as a proportion of total ratings (minimum 100,000 ratings)',width=50),
+       x='',y='1-Star Ratings as a Percent of Total Ratings') +
+  theme(axis.ticks.y=element_blank(),
+        panel.background=element_rect(fill='white'),
+        panel.grid.major.x=element_line(color='gray'),
+        legend.position='none')
+```
+
+##Clusters
+As mentioned above, before starting to make recommendations, the 10,000 books were clustered using K-Means clustering.  This allows the books to be grouped by categories and facilitates category specific-recommendations.  
+
+The goal of k-means clustering is to maximize the distance between the clusters while minimizing the distance within the cluster.  This means that the clusters are as homogenious as possible while as different as possible from all other clusters.  
+
+The input variables to the algorithm were the popularity of the book (based on the total number of user ratings for each book) and the number of user tags assigned to each book for each genre.  Because k-means clustering uses the distance of points from the cluster centroid, each variable needed to be normalized to avoid variables with larger ranges having outsized influence on the distance measurement.  For this analysis, I used min-max standardization.  
+```{r kmeans, include=FALSE}
+set.seed(123)
+books <- read_csv('data/books_final.csv')
+
+books_filtered <- books %>% select(book_id,title,first_author,average_rating,ratings_count=work_ratings_count,Art:`Young Adult`)
+
+#Normalize data using min/max normalization
+summary <- 
+  data.frame(rbind(min=apply(books_filtered[,4:ncol(books_filtered)],2,min),
+        max=apply(books_filtered[,4:ncol(books_filtered)],2,max),
+        range=apply(books_filtered[,4:ncol(books_filtered)],2,max)-apply(books_filtered[,4:ncol(books_filtered)],2,min)))
+
+for (i in 4:ncol(books_filtered)) {
+  j <- i-3
+  books_filtered[,i] <- (books_filtered[,i]-summary[1,j])/summary[3,j]
+}
+
+#Run k-means clustering algorithm
+k_5 <- kmeans(books_filtered[,5:44],centers=5, nstart=5, iter.max=100)
+k_10 <- kmeans(books_filtered[,5:44],centers=10, nstart=5, iter.max=100)
+k_20 <- kmeans(books_filtered[,5:44],centers=20, nstart=5, iter.max=100)
+k_30 <- kmeans(books_filtered[,5:44],centers=30, nstart=5, iter.max=100)
+k_40 <- kmeans(books_filtered[,5:44],centers=40, nstart=5, iter.max=100)
+k_50 <- kmeans(books_filtered[,5:44],centers=50, nstart=5, iter.max=100)
+k_100 <- kmeans(books_filtered[,5:44],centers=100, nstart=5, iter.max=100)
+k_150 <- kmeans(books_filtered[,5:44],centers=150, nstart=5, iter.max=100)
+k_200 <- kmeans(books_filtered[,5:44],centers=200, nstart=5, iter.max=100)
+k_300 <- kmeans(books_filtered[,5:44],centers=300, nstart=5, iter.max=100)
+```
+
+There is no rule for how to determine the proper number of clusters (k value), so therefore I tried a number of different values and compared them.  As mentioned above, the goal is to maximize the ratio of Between-Cluster Varation (BCV) to Within-Cluster Variation (WCV).  The plot below shows the BCV/WCV ratio as compared to the number of clusters.  
+```{r kmeans plot, echo=FALSE}
+compare_kmeans <- data.frame(k=c(5,10,20,30,40,50,100,150,200,300),
+                             `between_SS/total_SS`=c(k_5$betweenss/k_5$totss,
+                                                     k_10$betweenss/k_10$totss,
+                                                     k_20$betweenss/k_20$totss,
+                                                     k_30$betweenss/k_30$totss,
+                                                     k_40$betweenss/k_40$totss,
+                                                     k_50$betweenss/k_50$totss,
+                                                     k_100$betweenss/k_100$totss,
+                                                     k_150$betweenss/k_150$totss,
+                                                     k_200$betweenss/k_200$totss,
+                                                     k_300$betweenss/k_300$totss))
+
+#Plot BCV/WCV
+ggplot(data=compare_kmeans,aes(x=k,y=`between_SS.total_SS`)) + 
+  geom_point() +
+  geom_line() +
+  scale_y_continuous(limits=c(0,1),breaks=seq(0,1,by=0.1),label=scales::percent) +
+  scale_x_continuous(limits=c(0,300), breaks=seq(0,300,by=20)) +
+  labs(title='Homogeneity of Clusters Increases as Number of Clusters Increases',
+       subtitle='But there are diminishing returns as the number of clusters increases',
+       x='Number of Clusters (k)',y='Between-Cluster Variation/Within-Cluster Variation') +
+  theme(axis.ticks.y=element_blank(),
+        panel.background=element_rect(fill='white'),
+        panel.grid.major.y=element_line(color='gray'),
+        legend.position='none')
+```
+
+As shown in the chart, the ratio continues to increase as k increases; however, the curve starts to flatten out, indicating a point of diminishing returns.  Based on this chart, I would probably say k=100 is a pretty good value.  
+
+As a representative set of clusters, the charts below show the centers plotted for each cluster variable for k=10.  The variables have been normalized from 0 to 1, so the closer the cluster centroid value for a particular variable is to 1, the more influence that variable has for that cluster.  
+```{r k10, echo=FALSE, fig.width=10, fig.height=24}
+#Centers
+k10_centers <- data.frame(cbind(Cluster=row(k_10$centers)[,1],k_10$centers)) %>% gather(key='Variable',value='Center',-Cluster)
+
+ggplot(k10_centers) +
+  geom_bar(aes(x=Variable,y=Center),stat='identity', fill='steelblue') +
+  coord_flip() +
+  theme(legend.position='none') +
+  theme_bw() +
+  facet_wrap(~Cluster, nrow=5)
+```
+
+Based on the centroids, we can start to identify some of the clusters by their characteristics.  Cluster 2 is sports books, cluster 3 is paranormal books, cluster 7 is mystery/crime, cluster 9 is chick lit and cluster 10 is comics/graphic novels.  
+
+##Recommender System
+Now that we have our clusters, it's time to build the recommender system.  I did this using the *recommenderlab* package in R.
+
+For this proof of concept, I am going to use one single cluster to make recommendations.  The cluster I will be using is cluster 27 from the k=100 analysis.  This cluster is contains paranormal/romance books.  
+```{r cluster27, echo=FALSE}
+k100_centers <- data.frame(cbind(Cluster=row(k_100$centers)[,1],k_100$centers)) %>% gather(key='Variable',value='Center',-Cluster)
+
+k100_centers %>% filter(Cluster==27) %>%
+ggplot() +
+  geom_bar(aes(x=Variable,y=Center),stat='identity',fill='steelblue') +
+  scale_y_continuous(limit=c(0,0.2),breaks=seq(0,0.2,by=0.05),expand=c(0,0)) +
+  coord_flip() +
+  theme_bw()
+```
+  
+The top 20 books in this cluster as listed below:
+```{r list,include=FALSE}
+cluster_books <- read_csv('data/cluster_books.csv')
+```
+```{r show books,echo=FALSE}
+kable(cluster_books,
+      caption='Table 2: Top 20 Books (by User Ratings Count) in Cluster 27')
+```
+
+In order to be able to test the accuracy of the model, I randomly split the 76 books in the cluster into a training and testing set using a 75%/25% split.  There were 56 books in the training set and the remaining 19 books were reserved for testing.
+
+I created a training matrix with users in rows and books in columns.  The 19 test books were included in the training matrix, but all of their ratings were set to NA (no rating for any users).  
+
+```{r model data, include=FALSE}
+#Ratings without clustering
+ratings <- read_csv('data/ratings.csv')
+clusters <- read_csv('data/clusters.csv')
+```
+```{r model , echo=FALSE}
+set.seed(123)
+ratings_cluster <- inner_join(ratings,clusters) %>% filter(k_100==27) %>% select(user_id,book_id,rating)
+ratings_matrix <- ratings_cluster %>% spread(key=book_id,value=rating)
+
+#Assign training and test books
+training_set_size <- floor(0.75*(ncol(ratings_matrix)-1))
+train <- sample(seq_len(ncol(ratings_matrix)-1),size=training_set_size)
+training_matrix <- ratings_matrix[,c(1,train)]
+test_matrix <- ratings_matrix[,-train]
+
+#Add books from test_matrix back to training matrix with all NAs
+test_matrix_NAs <- test_matrix[,-1]
+test_matrix_NAs[,] <- NA
+
+training_matrix <- cbind(training_matrix,test_matrix_NAs)
+
+#Remove rows of all NAs
+training_matrix <- cbind(training_matrix,ratings=apply(training_matrix[,-1],1,function(x) {sum(x,na.rm=TRUE)})) %>%
+  filter(ratings!=0) %>% select(-ratings)
+test_matrix <- cbind(test_matrix,ratings=apply(test_matrix[,-1],1,function(x) {sum(x,na.rm=TRUE)})) %>%
+  filter(ratings!=0) %>% select(-ratings)
+
+training_matrix <- as.data.frame(training_matrix) %>% column_to_rownames(var='user_id')
+training_matrix <- as(as.matrix(training_matrix),'realRatingMatrix')
+
+cluster27 <- Recommender(training_matrix, method='UBCF', parameter=list(method='cosine'))
+cluster27_recommendations <- predict(cluster27,newdata=training_matrix,n=100)
+
+test_predictions_all <- as(cluster27_recommendations,'matrix') %>% as.data.frame() %>% rownames_to_column() %>% 
+  rename(user_id=rowname) %>% mutate(user_id=as.integer(user_id))
+test_predictions <- test_predictions_all[,c(1,58:76)]
+```
+
+##Testing  
+The sum square error of the difference between the actual ratings and predicted ratings was calculated for each book in the test set.  This can be see in the table below.  
+```{r error, include=FALSE}
+#Calculate SSE for predictions
+fit <- test_matrix[1,-1]
+fit[,] <- 0
+fit <- data.frame(t(fit)) %>% rownames_to_column(var='book_id') %>% rename(SSE=X1)
+
+for (i in 1:(ncol(test_matrix)-1)) {
+  actual_v_predict <- inner_join(test_matrix[,c(1,i+1)],test_predictions[,c(1,i+1)],by=c('user_id'='user_id'))
+  fit$SSE[i] <- sum((actual_v_predict[,2]-actual_v_predict[,3])^2,na.rm=TRUE)
+  rm(actual_v_predict)
+}
+```
+```{r error table,echo=FALSE}
+kable(cbind(Book=fit[,1],SSE=round(fit[,2],2)),
+      caption='Table 3: Sum Squared Error of Difference between Predicted and Actual Ratings')
+```
+
+Below are box-and-whisker plots showing the predicted user rating compared to the actual user ratings for three representative books in the test set.  
+```{r box plots, echo=FALSE}
+actual_v_predict <- inner_join(test_matrix[,c(1,2)],test_predictions[,c(1,2)],by=c('user_id'='user_id')) %>%
+  filter(!is.na(`2549.x`))
+ggplot() + 
+  geom_boxplot(data=actual_v_predict,aes(x=as.factor(`2549.x`),y=`2549.y`)) +
+  labs(title=str_wrap('Rating Prediction Accuracy for Book 2549 Blue Moon (Anita Blake, Vampire Hunter, #8) by Laurell K. Hamilton',width=70),
+       x='Actual User Rating', y='Predicted User Rating') +
+  theme(axis.ticks.y=element_blank(),
+        panel.background=element_rect(fill='white'),
+        panel.grid.major.y=element_line(color='gray'),
+        legend.position='none')
+
+actual_v_predict <- inner_join(test_matrix[,c(1,11)],test_predictions[,c(1,11)],by=c('user_id'='user_id')) %>%
+  filter(!is.na(`3445.x`))
+ggplot() + 
+  geom_boxplot(data=actual_v_predict,aes(x=as.factor(`3445.x`),y=`3445.y`)) +
+  labs(title=str_wrap('Rating Prediction Accuracy for Book 3445 Succubus Blues (Georgina Kincaid, #1) by Richelle Mead',width=70),
+       x='Actual User Rating', y='Predicted User Rating') +
+  theme(axis.ticks.y=element_blank(),
+        panel.background=element_rect(fill='white'),
+        panel.grid.major.y=element_line(color='gray'),
+        legend.position='none')
+
+actual_v_predict <- inner_join(test_matrix[,c(1,20)],test_predictions[,c(1,20)],by=c('user_id'='user_id')) %>%
+  filter(!is.na(`9593.x`))
+ggplot() + 
+  geom_boxplot(data=actual_v_predict,aes(x=as.factor(`9593.x`),y=`9593.y`)) +
+  labs(title=str_wrap('Rating Prediction Accuracy for Book 9593 The Rapture of Canaan by Sheri Reynolds',width=70),
+       x='Actual User Rating', y='Predicted User Rating') +
+  theme(axis.ticks.y=element_blank(),
+        panel.background=element_rect(fill='white'),
+        panel.grid.major.y=element_line(color='gray'),
+        legend.position='none')
+```
+  
+Book 3445 has one of the highest SSE values of the test set and does not appear have great predictions; however, the other two books appear to have fairly decent predictions.  
+
+##Future Work
+Hopefully this proof of concept analysis showed the viability and usefulness of the idea.  For future research, I would start with creating a full prediction set for all clusters and evaluate the accuracy of the predictions.  Another area for expanding the concept would be to utilize the Goodreads API to pull additional user ratings for more books (although I may then run into computing limitations). 
