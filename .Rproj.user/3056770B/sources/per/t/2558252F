@@ -13,10 +13,10 @@
     "project_path" : "data_exploration.R",
     "properties" : {
         "cursorPosition" : "68,0",
-        "scrollLine" : "48",
+        "scrollLine" : "0",
         "tempName" : "Untitled1"
     },
-    "relative_order" : 2,
+    "relative_order" : 1,
     "source_on_save" : false,
     "source_window" : "",
     "type" : "r_source"

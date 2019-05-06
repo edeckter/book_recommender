@@ -288,11 +288,12 @@ I created a training matrix with users in rows and books in columns.  The 19 tes
 #Ratings without clustering
 ratings <- read_csv('data/ratings.csv')
 clusters <- read_csv('data/clusters.csv')
+
+ratings_cluster <- inner_join(ratings,clusters) %>% filter(k_100==27) %>% select(user_id,book_id,rating)
+ratings_matrix <- ratings_cluster %>% spread(key=book_id,value=rating)
 ```
 ```{r model , echo=FALSE}
 set.seed(123)
-ratings_cluster <- inner_join(ratings,clusters) %>% filter(k_100==27) %>% select(user_id,book_id,rating)
-ratings_matrix <- ratings_cluster %>% spread(key=book_id,value=rating)
 
 #Assign training and test books
 training_set_size <- floor(0.75*(ncol(ratings_matrix)-1))
